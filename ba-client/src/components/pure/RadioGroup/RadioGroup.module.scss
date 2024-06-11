@@ -1,0 +1,78 @@
+@import '../../../styles/mixins/focus';
+@import '../../../styles/mixins/media-queries';
+@import '../../../styles/variables/palette';
+
+.RadioGroupRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.RadioGroupItem {
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 1px solid $gray-450;
+  border-radius: 100%;
+  background-color: $white;
+}
+
+.RadioGroupItem:hover {
+  background-color: $bat-foam;
+}
+
+.RadioGroupItem:focus {
+  @include focus($innerBrdCol: $bat-cornflower-blue, $innerMeas: 2px, $outMeas: 0);
+}
+
+.RadioGroupIndicator {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.RadioGroupIndicator::after {
+  content: '';
+  display: block;
+  width: 8.2px;
+  height: 8.2px;
+  border-radius: 50%;
+  background-color: $bat-blue-600;
+}
+
+.Label {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+button.disabled {
+  border: 1px solid $gray-450;
+  background: none !important;
+}
+
+.disabledLabel {
+  color: $gray-550;
+}
+
+// media queries
+@media #{$tablet-portrait} {
+  .RadioGroupItem {
+    width: 16px;
+    height: 16px;
+  }
+
+  .RadioGroupIndicator::after {
+    width: 10px;
+    height: 10px;
+  }
+}

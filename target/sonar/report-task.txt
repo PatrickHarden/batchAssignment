@@ -1,0 +1,6 @@
+projectKey=srm-web:dev
+serverUrl=https://sonarqube.sts.scholastic.com
+serverVersion=8.9.6.50800
+dashboardUrl=https://sonarqube.sts.scholastic.com/dashboard?id=srm-web%3Adev&pullRequest=1677780757
+ceTaskId=AYajhwfCJPRhZ3khQNEy
+ceTaskUrl=https://sonarqube.sts.scholastic.com/api/ce/task?id=AYajhwfCJPRhZ3khQNEy

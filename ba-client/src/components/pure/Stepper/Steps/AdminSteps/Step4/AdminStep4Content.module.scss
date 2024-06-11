@@ -1,0 +1,29 @@
+@import '../../../../../../styles/variables/palette';
+
+.adminStep4 {
+  &Radio {
+    margin: 10px 0 15px 10px;
+  }
+
+  &LineBreak {
+    border-top: 1px solid $gray-450;
+  }
+
+  &PleaseResolveHeader {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &StudentCount,
+  &ConflictHeader {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &ConflictDescription {
+    font-size: 16px;
+    font-weight: 300;
+  }
+}

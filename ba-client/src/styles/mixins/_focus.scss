@@ -1,0 +1,12 @@
+@mixin focus(
+  $innerMeas: 3px,
+  $outMeas: 6px,
+  $innerBrdCol: #fff,
+  $outerBrdCol: #70a8f4,
+  $inset: false
+) {
+  outline: 0;
+  appearance: none;
+  box-shadow: 0 0 0 $innerMeas $innerBrdCol if($inset, inset, ()),
+    0 0 0 $outMeas $outerBrdCol if($inset, inset, ());
+}

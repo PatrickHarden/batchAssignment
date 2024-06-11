@@ -1,0 +1,96 @@
+@import './../Dialog.module';
+@import '../../../../styles/variables/palette';
+@import '../../../../styles/mixins/focus';
+@import '../../../../styles/variables/z-index';
+
+.AlertDialogOverlay {
+  position: fixed;
+  z-index: $zindex-alert;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: rgb(102 102 102 / 40%);
+  inset: 0;
+}
+
+.AlertDialogContent {
+  @extend .DialogContent;
+
+  z-index: $zindex-alert;
+  max-width: 583px;
+  padding: 35px 32px 35px 80px;
+  overflow: auto;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.AlertDialogTitle {
+  margin-bottom: 1rem;
+  font-size: 18px;
+  font-weight: 500;
+
+  .warningIcon {
+    width: 32px;
+    height: 30px;
+    margin-right: 20px;
+    margin-left: -52px;
+
+    path {
+      fill: #e81111;
+    }
+  }
+}
+
+.footerButtons {
+  text-align: right;
+
+  button:last-child {
+    margin-left: 24px;
+  }
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    transform: translate(-50%, -48%) scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+// Trigger Style Options
+.TriggerButtonText {
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: black;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: capitalize !important;
+
+  &:hover,
+  &:focus {
+    background: $mint-tulip !important;
+  }
+
+  &:active {
+    background: $bat-blue-600 !important;
+    box-shadow: none;
+    color: white;
+
+    @include focus;
+  }
+}

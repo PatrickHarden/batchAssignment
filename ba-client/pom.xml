@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.scholastic</groupId>
+		<artifactId>ba-web</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>ba-client</artifactId>
+	<name>ba-client</name>
+	<description>BA Web Client</description>
+
+	<properties>
+		<sonar.language>ts</sonar.language>
+		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+		<sonar.sources>src</sonar.sources>
+		<sonar.tests>src</sonar.tests>
+		<sonar.exclusions>src/index.tsx, **/*.stories.tsx, src/setupTests.ts</sonar.exclusions>
+		<sonar.test.inclusions>**/*.test.ts,**/*.test.tsx</sonar.test.inclusions>
+		<sonar.typescript.lcov.reportPaths>coverage/lcov.info</sonar.typescript.lcov.reportPaths>
+		<sonar.testExecutionReportPaths>test-report.xml</sonar.testExecutionReportPaths>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>build</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.12.1</version>
+				<configuration>
+					<nodeVersion>v16.14.0</nodeVersion>
+					<npmVersion>8.3.1</npmVersion>
+				</configuration>
+				<executions>
+					<!-- Install node and npm -->
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+
+					<!-- Install dependencies -->
+					<execution>
+						<id>npm ci</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>ci</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Lint -->
+					<execution>
+						<id>npm run lint</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run lint</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Coverage -->
+					<execution>
+						<id>npm run coverage</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run coverage</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Build -->
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+
+					<!-- Storybook -->
+					<execution>
+						<id>npm run build-storybook</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>run build-storybook</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,11 @@
+@import '../../../../../../styles/mixins/media-queries';
+@import '../../../../../../styles/variables/palette';
+
+.contentContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contentContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: $gray-550;
+}

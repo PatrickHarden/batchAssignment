@@ -1,0 +1,65 @@
+// scholastic volume core styling
+@import '~@scholastic/volume-core/src/variables';
+
+$asset-base-path: '~@scholastic/volume-core/build/assets';
+
+@import '~@scholastic/volume-core/src/bootstrap';
+
+// mixins, variables, fonts, etc
+@import './styles';
+
+body {
+  margin: 0;
+  background-color: $gray-110;
+  color: $gray-800;
+  font-family: $museo-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+button {
+  &:focus {
+    @include focus;
+  }
+
+  @extend .button;
+}
+
+// media queries
+h1 {
+  font-size: 24px;
+
+  @media #{$tablet-portrait} {
+    font-size: 32px;
+  }
+}
+
+main {
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @media #{$tablet-portrait} {
+    padding: 0 26px;
+  }
+
+  @media #{$desktop} {
+    padding: 0 43px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border-width: 0;
+  white-space: nowrap;
+}

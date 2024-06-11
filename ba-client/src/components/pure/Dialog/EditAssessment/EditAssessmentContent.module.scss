@@ -1,0 +1,38 @@
+@import '../../../../styles/variables/palette';
+
+.subHeader {
+  margin-top: 15px;
+  padding-bottom: 15px;
+  color: $gray-800;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+
+  .name {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .radioGroupContainer {
+    margin-top: 10px;
+  }
+}
+
+.assessmentGuidelines {
+  margin-top: 15px;
+
+  .header {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+  }
+
+  .text {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+  }
+}

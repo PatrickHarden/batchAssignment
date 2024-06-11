@@ -1,0 +1,64 @@
+@import '../../../styles/variables/palette';
+@import '../../../styles/variables/fonts';
+@import '../../../styles/mixins/media-queries';
+
+.gradeSelector {
+  display: flex;
+  flex-wrap: wrap;
+
+  .gradeItem {
+    margin: 0;
+    padding: 8px 10px;
+    transition: 0.2s ease all;
+    border: 1px solid $gray-450;
+    border-radius: 4px;
+    background-color: $white;
+    color: $gray-800;
+    font-family: $museo-sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    text-transform: unset;
+
+    @media #{$tablet-portrait} {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    &:hover {
+      background-color: #ddf3fd;
+    }
+
+    &[data-state='on'] {
+      background-color: $bat-blue-600;
+      color: $white;
+
+      &:hover {
+        background-color: $bat-blue-800;
+      }
+    }
+
+    &[data-disabled] {
+      background-color: $gray-350;
+      color: $white;
+    }
+
+    &:active {
+      background-color: $bat-blue-800;
+      color: $white;
+    }
+  }
+
+  .notAllowed {
+    cursor: not-allowed;
+  }
+
+  .itemGap {
+    margin: 0 8px 12px 0;
+
+    @media #{$tablet-portrait} {
+      margin-right: 12px;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import '../../../styles/variables/palette';
+
+.filtersContainer {
+  display: flex;
+  width: fill-available;
+  max-width: 100% !important;
+  min-height: 96px;
+  padding: 26px 0 0 !important;
+
+  .allFilters {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: none;
+    padding: 0;
+
+    .filterContainer {
+      max-width: fit-content;
+      margin: 0 10px 10px 0;
+      padding: 0;
+      text-align: left;
+
+      &:first-child {
+        min-width: 116px;
+      }
+
+      &:nth-child(3) {
+        margin-right: -5px;
+        margin-bottom: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+
+      .filterHeader {
+        display: flex;
+        align-items: center;
+        height: 16px;
+        margin: 0 0 8px 2px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .filterDropdowns {
+        display: flex;
+        align-items: center;
+
+        .hasRange {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}

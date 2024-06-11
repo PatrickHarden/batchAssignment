@@ -1,0 +1,335 @@
+@import '../../../styles/mixins/focus';
+@import '../../../styles/variables/fonts';
+@import '../../../styles/mixins/media-queries';
+@import '../../../styles/variables/palette';
+
+.container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  background-color: $white;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
+  color: rgb(0 0 0 / 87%);
+
+  &.tableContainer {
+    height: calc(100vh - 370px);
+    margin-top: -30px;
+    border-top: 2px solid $bat-blue-600;
+    box-shadow: none;
+
+    @media #{$desktop} {
+      height: calc(100vh - 370px);
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      height: 396px !important;
+    }
+
+    @media (max-width: 530px) {
+      max-height: calc(100vh - 490px) !important;
+    }
+
+    // temporary fix to hide certain columns until we program an additional setting for it
+    tr {
+      > td:nth-of-type(8),
+      th:nth-of-type(8),
+      td:nth-of-type(9),
+      th:nth-of-type(9),
+      td:nth-of-type(10),
+      th:nth-of-type(10) {
+        display: none !important;
+      }
+    }
+
+    // remove the text indent for the action column since it has different content
+    .Table {
+      width: 100%;
+
+      .TableHead {
+        tr {
+          th:last-of-type {
+            > span {
+              text-indent: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .Table {
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    .TableHead {
+      display: table-header-group;
+      background-color: $gray-120;
+
+      tr {
+        z-index: 2;
+        background: $gray-120;
+
+        th {
+          background: $gray-120;
+
+          span {
+            display: flex;
+            align-items: center;
+            min-width: 80px;
+            color: $gray-800 !important;
+            font-weight: 600 !important;
+
+            > button {
+              position: relative;
+              right: -6px;
+            }
+          }
+        }
+
+        th:first-of-type {
+          z-index: 1;
+        }
+
+        th:last-of-type {
+          > span {
+            text-indent: 13px;
+          }
+        }
+
+        .arrows {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          margin-left: 12px;
+          padding: 0;
+          border: none;
+          background: transparent;
+
+          svg {
+            cursor: pointer;
+          }
+
+          > svg:first-of-type {
+            margin-bottom: 8px;
+          }
+        }
+
+        .invertedArrows {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          margin-left: 12px;
+          padding: 0;
+          transform: rotate(180deg);
+          border: none;
+          background: transparent;
+
+          svg {
+            cursor: pointer;
+          }
+
+          > svg:first-of-type {
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      display: table-row-group;
+
+      td {
+        height: 55px;
+        font-weight: 400;
+
+        > div {
+          border: none;
+
+          > button {
+            > span {
+              color: $bat-blue-600 !important;
+
+              path {
+                stroke: $bat-blue-600 !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    tr {
+      display: table-row;
+      position: relative;
+      outline: 0;
+      color: inherit;
+      vertical-align: middle;
+
+      th,
+      td {
+        display: table-cell;
+        padding: 4px 16px;
+        overflow: hidden;
+        border-right: 1px solid rgb(224 224 224);
+        border-bottom: 1px solid rgb(224 224 224 / 100%);
+        font-size: 0.875rem;
+        font-weight: 400;
+        letter-spacing: 0.0107em;
+        line-height: 1.43;
+        text-align: left;
+        vertical-align: inherit;
+
+        > input[type='checkbox'] {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.proficiency {
+  text-align: left;
+
+  .greenDot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: $bat-chateau-green;
+  }
+
+  .redDot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: $bat-pomegranate;
+  }
+
+  .blueDot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: $bat-blue-800;
+  }
+
+  .purpleDot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: $bat-purple-heart;
+  }
+}
+
+.TableCell {
+  font-size: 16px;
+}
+
+.hideBorderBottom {
+  border-bottom: none !important;
+
+  td.hideDupes {
+    border-bottom: none !important;
+  }
+}
+
+.TableContainer {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  background: $white;
+}
+
+@media #{$mobile} {
+  .sticky {
+    position: sticky;
+    left: 0;
+    background: $white;
+    box-shadow: inset -7px 0 4px -7px rgb(0 0 0 / 60%);
+
+    &Checkbox {
+      position: sticky;
+      left: 0;
+      background: $white;
+      box-shadow: none;
+    }
+
+    &WithCheckbox {
+      position: sticky;
+      z-index: 1;
+      left: 52.5px;
+      background: $white;
+      box-shadow: inset -7px 0 4px -7px rgb(0 0 0 / 60%);
+    }
+  }
+}
+
+.notAllowed {
+  cursor: not-allowed;
+}
+
+.tableSpan {
+  width: 100%;
+}
+
+.AlignLeft {
+  text-align: left !important;
+}
+
+.AlignRight {
+  text-align: right !important;
+}
+
+.AlignCenter {
+  text-align: center !important;
+}
+
+.SpanSROnly {
+  > div {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;
+    white-space: nowrap;
+  }
+
+  td.hideDupes > * {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;
+    white-space: nowrap;
+  }
+}
+
+.truncateName {
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tableCheckbox {
+  margin: 0;
+}

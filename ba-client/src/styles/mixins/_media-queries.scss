@@ -1,0 +1,19 @@
+// mobile-xs starts at 320px through 567px (height: 568px)
+$mobile-xs: 'only screen and (min-width: 320px)';
+$mobile-xs-retina: 'only screen and (min-width: 320px) and (-webkit-min-device-pixel-ratio: 2)';
+
+// mobile starts at 568px through 767px (height: 539px minimum)
+$mobile: 'only screen and (min-width: 568px)';
+$mobile-retina: 'only screen and (min-width: 568px) and (-webkit-min-device-pixel-ratio: 2)';
+
+// tablet-portrait starts at 768px through 1023px (height: 1024px)
+$tablet-portrait: 'only screen and (min-width: 768px)';
+$tablet-portrait-retina: 'only screen and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2)';
+
+// tablet-landscape starts at 1024px through 1335px (height: 768px)
+$tablet-landscape: 'only screen and (min-width: 1024px)';
+$tablet-landscape-retina: 'only screen and (min-width: 1024px) and (-webkit-min-device-pixel-ratio: 2)';
+
+// desktop is 1366px and above (height starts at 768px)
+$desktop: 'only screen and (min-width: 1366px)';
+$desktop-retina: 'only screen and (min-width: 1366px) and (-webkit-min-device-pixel-ratio: 2)';

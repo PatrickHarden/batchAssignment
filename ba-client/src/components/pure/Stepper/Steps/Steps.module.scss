@@ -1,0 +1,27 @@
+@import '../../../../styles/mixins/media-queries';
+@import '../../../../styles/variables/palette';
+
+.contentContainer {
+  .contentHeader {
+    font-size: 18px;
+    font-weight: 600;
+
+    @media #{$tablet-portrait} {
+      font-size: 20px;
+    }
+  }
+
+  .subHeaderContainer {
+    display: flex;
+    margin: 8px 0 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px $gray-450 solid;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+
+    .subHeaderText {
+      width: 64ch;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+    "$schema": "https://json.schemastore.org/stylelintrc.json",
+    "extends": [
+        "stylelint-config-standard-scss",
+        "stylelint-config-property-sort-order-smacss",
+        "stylelint-prettier/recommended"
+    ],
+    "rules": {
+        "media-feature-range-notation": [
+            "prefix"
+        ],
+        "selector-class-pattern": [
+            "^[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?$",
+            {
+                "message": "Expected class name to be camelCase",
+                "severity": "warning"
+            }
+        ],
+        "keyframes-name-pattern": [
+            "^[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?$",
+            {
+                "message": "Expected keyframe to be camelCase"
+            }
+        ],
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": [
+                    "export",
+                    "global"
+                ]
+            }
+        ],
+        "scss/dollar-variable-pattern": [
+            "^[a-z]+((\\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?$",
+            {
+                "severity": "warning",
+                "message": "Expected scss variable to be camelCase"
+            }
+        ],
+        "property-no-unknown": null,
+        "no-descending-specificity": [
+            true,
+            {
+                "severity": "warning"
+            }
+        ],
+        "scss/at-extend-no-missing-placeholder": [
+            true,
+            {
+                "severity": "warning"
+            }
+        ]
+    }
+}

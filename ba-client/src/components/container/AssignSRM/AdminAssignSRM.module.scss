@@ -1,0 +1,11 @@
+@import '../../../styles/mixins/media-queries';
+
+.schoolYear {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 400;
+
+  .year {
+    font-weight: 600;
+  }
+}

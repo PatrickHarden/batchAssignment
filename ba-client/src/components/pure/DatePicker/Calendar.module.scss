@@ -1,0 +1,107 @@
+@import '../../../styles/variables/palette';
+@import '../../../styles/variables/fonts';
+@import '../../../styles/mixins/focus';
+@import '../../../styles/mixins/media-queries';
+
+.root {
+  --rdp-cell-size: 37px;
+  --rdp-accent-color: #{$bat-blue-600};
+  --rdp-background-color: #{$bat-blue-800};
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid rgb(0 0 0 / 75%);
+
+  font-family: $museo-sans;
+
+  .month {
+    margin: 0.5rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: 0 0 10px $gray-600;
+    color: $gray-800;
+
+    @media #{$mobile} {
+      margin: 0;
+    }
+  }
+
+  .captionLabel {
+    color: #242424;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .head {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  .day {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    font-weight: 400;
+
+    &:disabled {
+      border: unset;
+      background-color: $white;
+      color: $gray-500;
+    }
+
+    &:not(:disabled) {
+      &:focus {
+        @include focus(2px, 4px);
+
+        background-color: $bat-blue-600;
+        color: $white;
+      }
+
+      &:hover {
+        background-color: var(--rdp-background-color);
+        color: $white;
+      }
+
+      &:active {
+        background-color: #002d70;
+        color: $white;
+      }
+    }
+  }
+
+  .dayRangeMiddle {
+    width: var(--rdp-cell-size);
+    height: 25px;
+    border-radius: 0;
+    background-color: $mint-tulip;
+    color: $gray-800;
+  }
+
+  .dayRangeStart:not(.dayRangeEnd)::after {
+    content: '';
+    position: absolute;
+    top: 1.75px;
+    left: 20px;
+    width: 13px;
+    height: 25px;
+    background-color: $mint-tulip;
+    mix-blend-mode: darken;
+  }
+
+  .dayRangeEnd:not(.dayRangeStart)::after {
+    content: '';
+    position: absolute;
+    top: 1.75px;
+    right: 20px;
+    width: 13px;
+    height: 25px;
+    background-color: $mint-tulip;
+    mix-blend-mode: darken;
+  }
+}

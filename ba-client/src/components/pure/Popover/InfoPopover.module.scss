@@ -1,0 +1,63 @@
+@import '../../../styles/mixins/focus';
+@import '../../../styles/variables/fonts';
+
+.popoverButton {
+  width: auto;
+  height: auto;
+  padding: revert;
+  border: none;
+  background-color: transparent;
+  vertical-align: text-top;
+
+  &:focus {
+    box-shadow: none;
+
+    svg {
+      @include focus(1px, 3px);
+
+      border-radius: 50%;
+    }
+  }
+
+  &:hover {
+    rect:first-child {
+      stroke: #116eee;
+      fill: #ddf3fd;
+    }
+  }
+
+  &:active {
+    rect:first-child {
+      stroke: #116eee;
+      fill: #c3dafa;
+    }
+  }
+}
+
+.toolTipPopout {
+  width: 281px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff7cc;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%), 0 0 20px 0 rgb(0 0 0 / 19%);
+  font-size: 12px;
+}
+
+.toolTipArrow {
+  position: absolute;
+  top: -31px !important;
+  width: 0;
+  margin-left: 3px;
+  border: 16px solid transparent;
+  border-bottom-color: #fff7cc;
+
+  &::before,
+  &::after {
+    content: none;
+  }
+}
+
+.body {
+  padding: 1rem;
+}

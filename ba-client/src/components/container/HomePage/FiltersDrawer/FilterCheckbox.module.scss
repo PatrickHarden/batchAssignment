@@ -1,0 +1,73 @@
+@import '../../../../styles/variables/palette';
+@import '../../../../styles/mixins/focus';
+
+.rootContainer {
+  margin-top: 1rem;
+
+  .checkboxContainer {
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+
+    &:first-child {
+      padding-top: 0.8rem;
+    }
+
+    &:last-child {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.container {
+  margin-top: 16px;
+  padding: 4px;
+  font-weight: 400;
+}
+
+.rowSite {
+  margin-bottom: 8px;
+}
+
+.rowAssessment {
+  margin-bottom: 0;
+}
+
+.row {
+  margin-bottom: 4px;
+}
+
+.rowAssessment,
+.rowSite,
+.row {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  padding: 6px;
+  overflow-x: hidden;
+
+  label {
+    margin: 0;
+  }
+}
+
+.radioContainer {
+  margin-bottom: 0.8rem;
+  padding-left: 2.2rem;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: 300;
+}
+
+.divider {
+  min-width: 250px;
+  max-width: 90%;
+  height: 1px;
+  margin-left: 6px;
+  background-color: $gray-350;
+}

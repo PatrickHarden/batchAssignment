@@ -1,0 +1,21 @@
+@import '../../../styles/variables/palette';
+@import '../../../styles/mixins/media-queries';
+
+.card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgb(0 0 0 / 12.5%);
+  border-radius: 16px;
+  background-clip: border-box;
+  background-color: $white;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+  word-wrap: break-word;
+
+  @media #{$tablet-portrait} {
+    padding: 24px;
+    border-radius: 24px;
+  }
+}

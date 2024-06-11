@@ -1,0 +1,104 @@
+#!/usr/bin/env groovy
+
+node('nodejs') {
+    properties(
+        [
+            parameters([
+                string(name: 'BRANCH_NAME',  defaultValue: 'develop', description: 'Enter name of branch from which to execute test e.g feature/LD-123-test.', trim: true),
+                choice(name: 'TEST_ENVIRONMENT', choices: ['stage', 'qa', 'perf', 'prod'], description: 'Select desired environment for test execution.'),
+                string(name: 'TAGS', defaultValue: '@Regression', description: 'Desired Annotation for Test Execution. For example: @Login.', trim: true),
+                choice(name: 'THREADS', choices: ['1', '2', '3', '4', '5'], description: 'Select desired number of threads for test execution.'),
+                choice(name: 'OS', choices: ['MacOS Catalina', 'MacOS Monterey', 'MacOS Big sur', 'macOS Mojave', 'macOS High Sierra', 'Windows 11', 'Windows 10'], description: 'Select desired operating system for LambdaTest.'),
+                choice(name: 'WEB_BROWSER', choices: ['Chrome', 'Safari', 'MicrosoftEdge'], description: 'Select desired broswer for LambdaTest. Use Chrome or MicrosoftEdge for Windows OS.'),
+                string(name: 'WEB_BROWSER_VERSION', defaultValue: 'latest', description: 'Enter desired version for the selected browser.', trim: true)
+            ]),
+
+            buildDiscarder(
+                logRotator(daysToKeepStr: '14', numToKeepStr: '10')
+            ),
+
+            pipelineTriggers(
+                [cron('H 5 * * *')]
+            ),
+            
+            office365ConnectorWebhooks([
+                [   
+                    name: "CPD Test", url: "${LD_JENKINS_TEAMS_CHANNEL}", notifyBackToNormal: true, notifyFailure: true, notifyRepeatedFailure: true, notifySuccess: true, notifyUnstable: true, notifyAborted: true, factDefinitions: [[name: "Build Url", template: "${env.BUILD_URL}"], [name: "Cucumber Report", template: "${env.BUILD_URL}cucumber-html-reports/overview-features.html"], [name: "LambdaTest Build", template: "https://automation.lambdatest.com/build"]]
+                ]
+            ]),
+
+            disableConcurrentBuilds()
+        ]
+    )
+
+    def rtNpm = Artifactory.newNpmBuild()
+    def server = Artifactory.server("Scholastic Artifactory")
+
+    try {
+        timeout(time: 120, unit: 'MINUTES') {
+            stage('Initialize') {
+                scmVars = checkout scm
+
+                rtNpm.resolver server: server, repo: "npm-virtual"
+                rtNpm.deployer server: server, repo: "npm-digea-local"
+                rtNpm.tool = "nodejs-14.15.3"
+
+                env.NODEJS_HOME = "${tool 'nodejs-14.15.3'}"
+                env.PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
+
+                env.CPD_TEST_BRANCH = sh(script: "echo ${scmVars.GIT_BRANCH} | sed -e 's|origin/||g'", returnStdout: true).trim()
+                echo "Branch Name = $CPD_TEST_BRANCH"
+
+                env.ENV = "${params.TEST_ENVIRONMENT}"
+                env.THREADS = "${params.THREADS}"
+                env.TAGS = "${params.TAGS}"
+
+                env.RUN_ON_LAMBDA = true
+                                
+                env.OPERATING_SYSTEM = "${params.OS}"
+                echo "Selected Operating Environment = $OPERATING_SYSTEM."
+                    
+                env.BROWSER = "${params.WEB_BROWSER}"
+                echo "Selected Browser = $BROWSER."
+        
+                env.BROWSER_VERSION = "${params.WEB_BROWSER_VERSION}"
+                echo "Selected $BROWSER Version = $BROWSER_VERSION."
+
+                currentBuild.description = "$TAGS TEST AGAINST $BRANCH_NAME"
+            }
+          
+            stage ('Execute npm install') {
+                sh '''
+                    npm --prefix cpd-test install
+                '''
+            }
+
+            stage ('Execute bdd:setup') {
+                sh '''
+                    npm --prefix cpd-test run bdd:setup
+                '''
+            }
+
+            stage ('Execute Automated Test') {
+                sh '''
+                    echo "View LamdaTest Build here: https://automation.lambdatest.com/build"
+                    npm --prefix cpd-test run bdd:cucumber || true
+                '''
+            }
+
+            stage ('Generate Cucumber Report') {
+                cucumber fileIncludePattern: 'cpd-test/reports/*.json'
+            }
+        }
+
+    } catch (exc) {
+        echo "ERROR: " + exc.getMessage()
+        currentBuild.result = "FAILURE"
+        error(exc.getMessage())
+        
+    } finally {
+        stage ('Clean Workspace') {
+            cleanWs(disableDeferredWipeout: true, deleteDirs: true)
+        }
+    }
+}

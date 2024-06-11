@@ -1,0 +1,88 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  margin: 5px;
+  padding: 0 20px;
+  border: solid 1px;
+  border-radius: 20px;
+  font-family: $museo-sans;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--black {
+    border-color: transparent;
+    background-color: $gray-800;
+    color: #fff;
+
+    &:hover:enabled {
+      background-color: $black;
+    }
+
+    &:active:enabled {
+      background-color: $gray-800;
+    }
+  }
+
+  &--clifford-red {
+    border-color: transparent;
+    background-color: #e81111;
+    color: #fff;
+
+    &:hover:enabled {
+      background-color: #b90000;
+    }
+
+    &:active:enabled {
+      background-color: #a20c0c;
+    }
+  }
+
+  &--white-black {
+    border-color: $gray-800;
+    background-color: #fff;
+    color: $gray-800;
+
+    &:hover:enabled {
+      border-color: $black;
+      background-color: #ddf3fd;
+      color: $black;
+    }
+
+    &:active:enabled {
+      border-color: $gray-800;
+      background-color: $bat-blue-300;
+      color: $gray-800;
+    }
+  }
+
+  &--white-red {
+    border-color: #e81111;
+    background-color: #fff;
+    color: #e81111;
+
+    &:hover:enabled {
+      background-color: #ffe9ed;
+    }
+
+    &:active:enabled {
+      background-color: #ffcdd7;
+    }
+  }
+
+  &:disabled {
+    border-color: #919191;
+    background-color: #919191;
+    color: #b5b5b5;
+    cursor: not-allowed;
+
+    path {
+      stroke: #b5b5b5;
+    }
+  }
+}

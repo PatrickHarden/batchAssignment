@@ -1,0 +1,22 @@
+@import '../../../styles/mixins/focus';
+@import '../Dropdown/Dropdown.module';
+
+.dropdownCheckbox {
+  @extend .dropdown;
+
+  .open {
+    margin: -10px;
+    padding: 10px;
+  }
+}
+
+.menu {
+  padding-top: 0;
+}
+
+.footerButtons {
+  display: flex;
+  justify-content: space-evenly;
+  height: 40px;
+  margin: 15px 0;
+}

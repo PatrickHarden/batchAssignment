@@ -1,0 +1,107 @@
+@import '../../../styles/variables/palette';
+@import '../../../styles/variables/fonts';
+@import '../../../styles/mixins/media-queries';
+
+$footer-height: 70px;
+
+.stepperContainer {
+  .stepper {
+    width: 90%;
+    margin: 17px auto 20px;
+    padding: 0;
+    background-color: transparent;
+
+    @media #{$mobile-xs} {
+      width: 220px;
+    }
+
+    @media #{$tablet-landscape} {
+      margin: -22px auto 26px;
+    }
+
+    .step {
+      width: 14px;
+      height: 14px;
+      padding: 0;
+      border-radius: 50%;
+      background: $gray-450;
+    }
+
+    .stepActive {
+      background: $bat-blue-600;
+    }
+
+    .stepCompleted {
+      background-image: url('/assets/icons/stepCompleted.svg');
+      background-position: center;
+    }
+  }
+
+  .card {
+    margin-bottom: calc($footer-height + 36px);
+  }
+
+  .stepControls {
+    position: fixed;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $gray-110;
+    box-shadow: 0 -4px 4px rgb(0 0 0 / 20%);
+
+    .controlsContainer {
+      display: flex;
+      align-items: center;
+      max-width: 1366px;
+      min-height: $footer-height;
+      margin: 0 auto;
+      padding: 0 16px;
+
+      @media #{$tablet-portrait} {
+        padding: 0 26px;
+      }
+
+      @media #{$desktop} {
+        padding: 0 43px;
+      }
+    }
+
+    .leftControls {
+      button {
+        padding: 0 9px;
+      }
+
+      .previous {
+        display: none;
+      }
+
+      // media queries
+      @media #{$tablet-portrait} {
+        .leftCaret {
+          margin-right: 5px;
+        }
+
+        button {
+          padding: 0 20px;
+        }
+
+        .previous {
+          display: inline;
+        }
+      }
+    }
+
+    .rightControls {
+      margin-left: auto;
+
+      .cancelButton {
+        margin-right: 20px;
+      }
+
+      .rightCaret {
+        margin-left: 5px;
+      }
+    }
+  }
+}

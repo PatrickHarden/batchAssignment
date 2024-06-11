@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.7</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.scholastic</groupId>
+	<artifactId>ba-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ba-web</name>
+	<description>BA Web App</description>
+
+	<properties>
+		<sonar.host.url>https://sonarqube.sts.scholastic.com</sonar.host.url>
+		<sonar.projectName>${project.artifactId}</sonar.projectName>
+		<sonar.projectKey>${project.artifactId}:dev</sonar.projectKey>
+	</properties>
+
+	<modules>
+		<module>ba-client</module>
+		<module>ba-server</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.9.1.2184</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

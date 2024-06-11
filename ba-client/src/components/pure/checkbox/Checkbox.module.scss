@@ -1,0 +1,68 @@
+@import '../../../styles/mixins/focus';
+@import '../../../styles/variables/palette';
+
+.checkbox {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  margin-right: 16px;
+  padding: 9px;
+  border: 1px solid $gray-750;
+  border-radius: 3px;
+  background-color: $white;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%), inset 0 -15px 10px -12px rgb(0 0 0 / 5%);
+  appearance: none;
+
+  &:hover {
+    background-color: $bat-foam;
+    cursor: pointer;
+  }
+
+  &:hover:checked {
+    border-color: transparent;
+    background-color: $bat-blue-800;
+  }
+
+  &:active,
+  :checked:active {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%), inset 0 1px 3px rgb(0 0 0 / 10%);
+
+    @include focus;
+  }
+
+  &:checked,
+  &:indeterminate {
+    border-color: $bat-blue-600;
+    background-color: $bat-blue-600;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%), inset 0 -15px 10px -12px rgb(0 0 0 / 5%),
+      inset 15px 10px -12px rgb(255 255 255 / 10%);
+  }
+
+  &:checked::after {
+    content: url('../../../assets/icons/whiteCheckmark.svg');
+    position: absolute;
+    top: -4px;
+    left: 2px;
+    font-size: 14px;
+  }
+
+  &:indeterminate::after {
+    content: url('../../../assets/icons/checkboxIndeterminate.svg');
+    position: absolute;
+    top: -7px;
+    left: 2px;
+    font-size: 14px;
+  }
+
+  &:focus {
+    @include focus;
+  }
+
+  &:disabled {
+    border: none;
+    background-color: $gray-350;
+    cursor: not-allowed;
+  }
+}

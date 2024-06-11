@@ -1,0 +1,130 @@
+@import '../../../../styles/mixins/media-queries';
+@import '../../../../styles/variables/palette';
+
+.drawerAccordion {
+  position: relative;
+  height: 100%;
+
+  label {
+    padding-left: 4px;
+  }
+
+  .contentWrapper {
+    /* Webkit-based browsers */
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: $gray-550;
+    }
+
+    /* Firefox and other browsers */
+    .scrollable-element {
+      scrollbar-width: thin;
+    }
+
+    .scrollable-element::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background-color: $gray-550;
+    }
+
+    max-height: calc(100% - 144px);
+    padding-top: 6px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @media #{$mobile} {
+      max-height: calc(100% - 88px);
+    }
+
+    @media #{$mobile} {
+      margin-right: 48px;
+    }
+  }
+
+  .buttonRow {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 28px;
+    background: $white;
+    box-shadow: 0 -2px 10px rgb(0 0 0 / 10%);
+
+    @media #{$mobile} {
+      flex-direction: row;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 212px;
+      height: 40px;
+      margin: 0;
+      border: 1px solid $gray-800;
+      color: $gray-800;
+      cursor: pointer;
+
+      &:hover {
+        border: 1.5px solid $black;
+      }
+    }
+
+    .clearButton {
+      margin-bottom: 16px;
+      background-color: transparent;
+
+      @media #{$mobile} {
+        margin-right: 16px;
+        margin-bottom: 0;
+      }
+    }
+
+    .applyButton {
+      background-color: $gray-800;
+      color: $white;
+
+      &:disabled {
+        border-color: $gray-350;
+        background-color: $gray-350;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.schoolYearAccordion {
+  padding-top: 38px;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.checkbox {
+  margin: 1rem;
+
+  label {
+    max-width: 300px !important;
+    font-size: 14px;
+  }
+}
+
+.gradeAccordion {
+  margin: 1rem;
+}
+
+.dateRangePicker {
+  display: flex;
+  justify-content: center;
+  height: 420px;
+
+  @media #{$mobile} {
+    height: 405px;
+  }
+}

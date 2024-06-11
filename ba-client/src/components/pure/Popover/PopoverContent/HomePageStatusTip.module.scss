@@ -1,0 +1,10 @@
+@import '../../../../styles/variables/palette';
+
+.statusTip {
+  color: $black;
+  font-weight: 400;
+
+  .header {
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,36 @@
+@import '../../../styles/variables/palette';
+@import '../../../styles/variables/fonts';
+@import '../../../styles/variables/z-index';
+
+.tooltipContent {
+  z-index: $zindex-popover;
+  max-width: 161px;
+  max-height: var(--radix-tooltip-content-available-height);
+  padding: 12px;
+  overflow: auto;
+  background: $gray-800;
+  color: $white;
+  font-family: $museo-sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  overflow-wrap: break-word;
+
+  &[data-state='delayed-open'] {
+    animation: fadeIn 350ms ease-out;
+  }
+
+  .tooltipArrow {
+    fill: $gray-800;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

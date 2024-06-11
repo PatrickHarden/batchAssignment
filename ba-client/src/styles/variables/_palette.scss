@@ -1,0 +1,91 @@
+// Design Color System
+$bat-violet-800: #46006c;
+$bat-violet-600: #7200a2;
+$bat-violet-500: #9013fe;
+$bat-violet-400: #ab2ae0;
+$bat-violet-200: #d9a9ff;
+$bat-purple-heart: #6a37bc; // "Basic" proficiency color
+
+$bat-blue-800: #004eb9; // "Advanced" proficiency color
+$bat-blue-700: #00529e;
+$bat-blue-600: #116eee; // Can be used for accessibility focus-active state
+$bat-blue-500: #0279e4;
+$bat-blue-450: #4076dd;
+$bat-blue-400: #85d7ff;
+$bat-blue-300: #c3dafa;
+$bat-blue-200: #d7f2ff;
+$bat-blue-100: #dde9fa;
+$bat-cornflower-blue: #70a8f4; // used for focus indicator and footer links
+$bat-foam: #ddf3fd; // used for hover state
+
+$bat-magenta-800: #660043;
+$bat-magenta-600: #ad0063;
+$bat-magenta-400: #e22883;
+$bat-magenta-200: #ff9fcf;
+$bat-green-900: #59b259;
+$bat-green-800: #004938;
+$bat-green-775: #009b38;
+$bat-green-750: #048200;
+$bat-green-700: #008177;
+$bat-green-600: #008265;
+$bat-green-550: #00978d;
+$bat-green-525: #00a39b;
+$bat-green-500: #2bd7be;
+$bat-green-400: #42ddb4;
+$bat-green-300: #9aeac4;
+$bat-green-200: #a4f1e3;
+$bat-green-175: #d7f2ff;
+$bat-green-150: #e4fff9;
+$bat-green-120: #e6faff;
+$bat-green-100: #f2fbf9;
+$bat-green-050: #f0f8fb;
+$bat-chateau-green: #35b94e; // "Proficient" proficiency color
+
+$bat-red-600: #b90000;
+$bat-red-500: #d0021b;
+$bat-red-400: #e81111;
+$bat-red-300: #eb1110;
+$bat-red-200: #ff0803;
+$bat-red-100: #ffd0d0;
+$bat-red-50: #ffe7e7;
+$bat-pomegranate: #f25112; // "Below Basic" proficiency color
+
+$bat-yellow-400: #fff46a;
+
+// Custom colors in designs but not in Design Color System
+// naming of Hex codes comes from http://chir.ag/projects/name-that-color/
+// ** No students popover message
+$karry: #ffebcf;
+$onahau: #ceeaff;
+$sandy-beach: #ffebcb;
+$sunset-orange: #ff553e;
+$picton-blue: #3c9bf4;
+$mint-tulip: #c2ecf1;
+
+// ** Highlighted student
+$anakiwa: #a0f1fd;
+
+// Greys on white background.
+$transparent: transparent;
+$white: #fff;
+$gray-100: #f5f5f5;
+$gray-110: #f4f4f4;
+$gray-120: #f5f7fd;
+$gray-200: #ebebeb;
+$gray-300: #d8d8d8;
+$gray-350: #d7d7d7;
+$gray-400: #d5d5d5;
+$gray-425: #c1c1c1;
+$gray-440: #b9b9b9;
+$gray-450: #b5b5b5;
+$gray-500: #b1b1b1;
+$gray-550: #919191;
+$gray-600: #909090;
+$gray-700: #696969;
+$gray-750: #666;
+$gray-755: #606060;
+$gray-765: #4a4a4a;
+$gray-775: #3a3a3a;
+$gray-800: #333;
+$gray-900: #1f1f1f;
+$black: #000;

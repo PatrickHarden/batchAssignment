@@ -1,0 +1,112 @@
+@import '../Dropdown/Dropdown.module';
+
+.dropdownCheckbox {
+  @extend .dropdown;
+}
+
+.menu {
+  ul {
+    width: 300px;
+    padding: 22px 24px !important;
+
+    label {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .checkboxRadioContainer {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #d7d7d7;
+
+      .checkboxGroup {
+        display: flex;
+        align-items: center;
+        align-self: flex-start;
+        margin: 0;
+      }
+    }
+
+    .checkboxRadioContainer:nth-last-child(2) {
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    > input {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+    }
+
+    > span {
+      position: absolute;
+      top: 4px;
+      left: 42px;
+    }
+
+    .radioContainer {
+      margin-left: 20px;
+
+      .radio {
+        display: flex;
+        position: relative;
+        align-items: center;
+        height: 28px;
+        margin: 8px 0 8px 13px;
+
+        label {
+          position: absolute;
+          top: 4px;
+          left: 10px;
+          margin: 0;
+          font-size: 14px;
+          text-indent: 8px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .disabled {
+        opacity: 0.6;
+
+        input,
+        label {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+
+    input[type='checkbox']:hover:not(:checked) {
+      background-color: #ddf3fd;
+    }
+
+    input[type='radio'] {
+      border-radius: 50%;
+    }
+
+    input[type='radio']:hover {
+      cursor: pointer;
+    }
+
+    input[type='radio']:checked {
+      accent-color: #116eee;
+    }
+
+    input[type='radio']:focus:checked {
+      @include focus($innerMeas: 2px, $outMeas: 4px);
+
+      width: 12px;
+      height: 12px;
+      background-color: #116eee;
+    }
+
+    .footerButtons {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+@import '../../../styles/mixins/media-queries';
+
+// used in Step1Content feComponentTransfer
+// can be used when you need checkbox in multiple columns
+.checkboxListContainer.column {
+  .allCheckboxContainer > div {
+    display: flex;
+    font: 16px;
+  }
+
+  .checkboxContainer {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-start;
+    height: fit-content;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin: 5px 50px 0 0;
+
+    label {
+      display: initial;
+      min-width: 150px;
+      max-width: 160px;
+      margin-bottom: initial;
+      font-weight: 400;
+      line-height: 16px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// for dropdownCheckbox component and when
+// you need a scrolling list of checkboxes
+.checkboxListContainer.dropdown {
+  margin-left: 15px;
+  overflow: auto;
+
+  .allCheckboxContainer > div {
+    display: flex;
+    font: 16px;
+  }
+
+  .checkboxContainer {
+    display: grid;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin: 5px 7px;
+
+    label {
+      display: initial;
+      min-width: 150px;
+      max-width: 160px;
+      margin-bottom: initial;
+      font-weight: 400;
+      line-height: 16px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// media queries
+.checkboxLabel {
+  @media #{$mobile} {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  @media #{$tablet-portrait} {
+    font-size: 16px;
+  }
+}

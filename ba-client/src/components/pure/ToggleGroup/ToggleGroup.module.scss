@@ -1,0 +1,76 @@
+@import '../../../styles/mixins/focus';
+@import '../../../styles/mixins/media-queries';
+@import '../../../styles/variables/fonts';
+
+.ToggleGroupRoot {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.ToggleItemContainer {
+  display: flex;
+
+  &:not(:first-child) {
+    margin-left: -1px;
+  }
+}
+
+.ToggleGroupItem:hover {
+  background-color: #ddf3fd;
+}
+
+.ToggleGroupItem:focus {
+  @include focus($innerBrdCol: #70a8f4, $innerMeas: 2px, $outMeas: 0);
+
+  z-index: 1;
+}
+
+.Label {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ToggleGroupItem {
+  flex-grow: 1;
+  justify-content: center;
+  width: fit-content;
+  height: auto;
+  min-height: 44px;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #d7d7d7;
+  border-radius: inherit;
+  background-color: white;
+
+  .Label {
+    padding: 12px 16px;
+  }
+}
+
+.ToggleGroupItem[aria-checked='true'] {
+  background-color: #116eee;
+
+  label {
+    color: white;
+  }
+}
+
+// media queries
+@media #{$tablet-portrait} {
+  .ToggleGroupRoot {
+    flex-direction: inherit;
+
+    .Label {
+      font-size: 16px;
+    }
+  }
+}

@@ -1,0 +1,152 @@
+import java.util.Date;
+
+def jfrogRepo = '679733529133.dkr.ecr.us-east-1.amazonaws.com'
+def businessUnit = 'da'
+def team = 'lit-platform-ba'
+def appName = 'lit-platform-ba-web'
+def gitRepo = 'git@bitbucket.org:scholastic/lit-platform-ba-web.git'
+def sshKeyId = 'openshift-ssh-key'
+def dateString = new Date().format("yyyyMMdd-HHmmss")
+def builderImage = '679733529133.dkr.ecr.us-east-1.amazonaws.com/s2i-ubi8-java-17:v1.0.0'
+def eksCluster = 'eks-nonprod'
+def vaultServer = 'https://vault.nonprod.foundations.aws.scholastic.tech/'
+def vaultCred = 'vault-nonprod'
+def validEnvs = ['dev','qa','perf','stage','prod']
+def envName = 'dev'
+if (validEnvs.contains(BRANCH_NAME)) {
+    envName = BRANCH_NAME
+}
+if (envName == 'prod') {
+    eksCluster = 'eks-prod'
+    vaultServer = 'https://vault.prod.foundations.aws.scholastic.tech/'
+    vaultCred = 'vault-prod'
+} else if (envName == 'perf') {
+    eksCluster = "eks-perf"
+}
+
+def imageName = """${jfrogRepo}/${businessUnit}/${appName}:${envName}-${dateString}"""
+
+def secrets = [
+    [path: """kubernetes/${eksCluster}/kubeconfig/${team}-${envName}""", engineVersion: 2, 
+        secretValues: [
+            [envVar: 'KUBECONFIG', vaultKey: """KUBECONFIG"""]
+        ]
+    ]
+]
+def configuration = [vaultUrl: vaultServer,  vaultCredentialId: vaultCred, engineVersion: 1]
+
+
+
+pipeline {
+    agent { label 'docker' }
+
+
+    stages {
+        stage("Clean") {
+            steps {
+                sh "rm -Rf *"
+            }
+        }
+        stage ('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [
+                        [ name: BRANCH_NAME ]
+                    ],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [
+                        [$class: 'RelativeTargetDirectory', relativeTargetDir: '.']
+                    ],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [
+                        [credentialsId: sshKeyId, url: gitRepo]
+                    ]
+                ])
+            }
+        }
+        stage ('Login to ECR') {
+            steps {
+                sh """aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 679733529133.dkr.ecr.us-east-1.amazonaws.com"""
+            }
+        }
+        stage ('Build') {
+            steps {
+                sh """docker pull ${builderImage}"""
+                sh """/usr/local/bin/s2i build --exclude "" . ${builderImage} ${imageName}"""
+            }
+        }
+        stage ('Push') {
+            steps {
+                sh """docker push ${imageName}"""
+            }
+        }
+        stage ('Cleanup') {
+            steps {
+                sh """docker rmi ${imageName}"""
+            }
+        }
+        stage ('Install Helm') {
+            steps {
+                sh """wget https://get.helm.sh/helm-v3.5.2-linux-amd64.tar.gz.sha256sum"""
+                sh """wget https://get.helm.sh/helm-v3.5.2-linux-amd64.tar.gz"""
+                script {
+                    def checksumStatus = sh(returnStatus: true, script: """sha256sum  -c helm-v3.5.2-linux-amd64.tar.gz.sha256sum""")
+                    if (checksumStatus != 0) {
+                        currentBuild.result = 'FAILED'
+                        error "Checksum Mismatch"
+                    }
+                }
+                sh """tar -xzf helm-v3.5.2-linux-amd64.tar.gz --strip-components=1 -C . linux-amd64/helm"""
+            }
+        }
+        stage ('Refresh Helm') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'jfrog-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """./helm repo add chart-hub https://scholastic.jfrog.io/scholastic/chart-hub --username=${USERNAME} --password='${PASSWORD}'"""
+                    sh """./helm repo update"""
+                }
+            }
+        }
+        stage ('Deploy') {
+            steps {
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    writeFile file: 'kubeconfig', text: env.KUBECONFIG
+                }
+                sh """./helm --kubeconfig kubeconfig upgrade --install ${appName} chart-hub/java-1.8 --reuse-values --set image.tag=${envName}-${dateString} --set image.repository=679733529133.dkr.ecr.us-east-1.amazonaws.com """
+            }
+        }
+        stage("Cloudfront invalidation Dev") {
+            when {
+                expression { return envName == "dev" }
+            }
+            steps {
+                withAWS(credentials:"digital-subs-nonprod-litpro-jenkins") {
+                    cfInvalidate(distribution:"E3383QUZ9Y4U5U", paths:['/*'])
+                }
+            }
+        }
+        stage("Cloudfront invalidation QA") {
+            when {
+                expression { return envName == "qa" }
+            }
+            steps {
+                withAWS(credentials:"digital-subs-nonprod-litpro-jenkins") {
+                    cfInvalidate(distribution:"E1XBEXQ6JVP7B3", paths:['/*'])
+                }
+            }
+        }
+        stage("Cloudfront invalidation Perf") {
+            when {
+                expression { return envName == "perf" }
+            }
+            steps {
+                withAWS(credentials:"digital-subs-nonprod-litpro-jenkins") {
+                    cfInvalidate(distribution:"E198KFREKA543R", paths:['/*'])
+                }
+            }
+        }
+    }
+}
+
+
